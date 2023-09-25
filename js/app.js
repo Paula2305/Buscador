@@ -1,13 +1,17 @@
 //Variables
-const resultado = document.querySelector('#resultado');
-
+const marca = document.querySelector('#marca');
 const year = document.querySelector('#year');
+const minimo = document.querySelector('#minimo');
+const maximo = document.querySelector('#maximo');
+const puertas = document.querySelector('#puertas');
+const transmision = document.querySelector('#transmision');
+const color = document.querySelector('#color');
+
+// Contenedor para los resultados
+const resultado = document.querySelector('#resultado');
 
 const max = new Date().getFullYear(); // agrega desde el año en el que te encontras
 const min = max - 10;
-
-console.log(max);
-console.log(min);
 
 //Eventos
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,7 +19,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     llenarSelect(); // Llena las opciones de años
 
-})
+});
+
+// Event listener para los select de busqueda
+marca.addEventListener('change', e => {
+    datosBusqueda.marca = e.target.value;
+    // console.log(datosBusqueda);
+});
+
+year.addEventListener('change', e => {
+    datosBusqueda.year = e.target.value;
+    // console.log(datosBusqueda); 
+});
+
+minimo.addEventListener('change', e => {
+    datosBusqueda.minimo = e.target.value;
+    // console.log(datosBusqueda); 
+});
+
+maximo.addEventListener('change', e => {
+    datosBusqueda.maximo = e.target.value;
+    // console.log(datosBusqueda); 
+});
+
+puertas.addEventListener('change', e => {
+    datosBusqueda.puertas = e.target.value;
+    // console.log(datosBusqueda); 
+});
+
+transmision.addEventListener('change', e => {
+    datosBusqueda.transmision = e.target.value;
+    // console.log(datosBusqueda); 
+});
+
+color.addEventListener('change', e => {
+    datosBusqueda.color = e.target.value;
+    // console.log(datosBusqueda); 
+});
+
+
+// Generar un objeto con la busqueda
+const datosBusqueda = {
+    marca: '',
+    year: '',
+    minimo: '',
+    maximo: '',
+    puertas: '',
+    transmision: '',
+    color: ''
+}
 
 
 //Funciones
@@ -34,7 +86,7 @@ function mostrarAutos(){
         resultado.appendChild(autoHTML);
     });
 
-}
+};
 
 // Genera los años del Select 
 function llenarSelect(){
@@ -46,6 +98,6 @@ function llenarSelect(){
         opcion.textContent = i;
         year.appendChild(opcion); // Agrega las opciones de año
 
-    }
+    };
 
-}
+};

@@ -15,7 +15,7 @@ const min = max - 10;
 
 //Eventos
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarAutos();
+    mostrarAutos(autos);
 
     llenarSelect(); // Llena las opciones de años
 
@@ -79,7 +79,8 @@ const datosBusqueda = {
 
 
 //Funciones
-function mostrarAutos(){
+function mostrarAutos(autos){
+    limpiarHTML();// Elimina el HTML previo
     autos.forEach( auto => {
 
         // destructuring
@@ -95,6 +96,15 @@ function mostrarAutos(){
     });
 
 };
+
+// Limpiar HTML
+
+function limpiarHTML(){
+    while(resultado.firstChild){
+        resultado.removeChild(resultado.firstChild);
+    }
+}
+
 
 // Genera los años del Select 
 function llenarSelect(){
@@ -116,7 +126,10 @@ function llenarSelect(){
 function filtrarAuto(){
     // console.log('filtrando');
     const resultado = autos.filter( filtrarMarca ).filter( filtrarYear );
-    console.log(resultado);
+
+    // console.log(resultado);
+
+    mostrarAutos(resultado);
 }
 
 function filtrarMarca(auto){
@@ -142,7 +155,6 @@ function filtrarYear(auto){
 
     // si el usuario no selecciona nada
     return auto;
-
 }
 
 

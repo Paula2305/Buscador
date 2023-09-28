@@ -48,7 +48,7 @@ maximo.addEventListener('change', e => {
 });
 
 puertas.addEventListener('change', e => {
-    datosBusqueda.puertas = e.target.value;
+    datosBusqueda.puertas = parseInt(e.target.value); // se debe convertir en entero y por eso se parsea
 
     filtrarAuto();
 });
@@ -125,7 +125,7 @@ function llenarSelect(){
 
 function filtrarAuto(){
     // console.log('filtrando');
-    const resultado = autos.filter( filtrarMarca ).filter( filtrarYear ).filter(filtrarMinimo).filter(filtrarMaximo);
+    const resultado = autos.filter( filtrarMarca ).filter( filtrarYear ).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor);
 
     // console.log(resultado);
 
@@ -159,33 +159,53 @@ function filtrarYear(auto){
 
 function filtrarMinimo(auto){
     const {minimo} = datosBusqueda;
-    // console.log(typeof year);
-    // console.log(typeof auto.year);
 
     if(minimo){
-        return auto.precio >= minimo; // no hace falta el parse porque porque no es un operador estricto 
+        return auto.precio >= minimo; 
     }
 
-    // si el usuario no selecciona nada
     return auto;
 }
 
 function filtrarMaximo(auto){
     const {maximo} = datosBusqueda;
-    // console.log(typeof year);
-    // console.log(typeof auto.year);
 
     if(maximo){
-        return auto.precio <= maximo; // no hace falta el parse porque porque no es un operador estricto 
+        return auto.precio <= maximo; 
     }
 
-    // si el usuario no selecciona nada
     return auto;
 }
 
+function filtrarPuertas(auto){
+    const {puertas} = datosBusqueda;
 
+    if(puertas){
+        return auto.puertas === puertas;
+    }
 
+    return auto;
+}
 
+function filtrarTransmision(auto){
+    const {transmision} = datosBusqueda;
+
+    if(transmision){
+        return auto.transmision === transmision;
+    }
+
+    return auto;
+}
+
+function filtrarColor(auto){
+    const {color} = datosBusqueda;
+
+    if(color){
+        return auto.color === color;
+    }
+
+    return auto;
+}
 
 
 

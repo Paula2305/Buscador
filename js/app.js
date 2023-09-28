@@ -30,33 +30,39 @@ marca.addEventListener('change', e => {
 });
 
 year.addEventListener('change', e => {
-    datosBusqueda.year = e.target.value;
+    datosBusqueda.year = parseInt(e.target.value); // Todos los datos de un formulario vienen como string y por eso se parsea a entero
     // console.log(datosBusqueda); 
+    filtrarAuto();
 });
 
 minimo.addEventListener('change', e => {
     datosBusqueda.minimo = e.target.value;
     // console.log(datosBusqueda); 
+    filtrarAuto();
 });
 
 maximo.addEventListener('change', e => {
     datosBusqueda.maximo = e.target.value;
     // console.log(datosBusqueda); 
+    filtrarAuto();
 });
 
 puertas.addEventListener('change', e => {
     datosBusqueda.puertas = e.target.value;
     // console.log(datosBusqueda); 
+    filtrarAuto();
 });
 
 transmision.addEventListener('change', e => {
     datosBusqueda.transmision = e.target.value;
     // console.log(datosBusqueda); 
+    filtrarAuto();
 });
 
 color.addEventListener('change', e => {
     datosBusqueda.color = e.target.value;
     // console.log(datosBusqueda); 
+    filtrarAuto();
 });
 
 
@@ -93,6 +99,7 @@ function mostrarAutos(){
 // Genera los años del Select 
 function llenarSelect(){
     // console.log('Llenando el select...');
+    
     for(let i = max; i >= min; i--){
         // console.log(i);
         const opcion = document.createElement('option');
@@ -108,21 +115,35 @@ function llenarSelect(){
 
 function filtrarAuto(){
     // console.log('filtrando');
-    const resultado = autos.filter(filtrarMarca);
+    const resultado = autos.filter( filtrarMarca ).filter( filtrarYear );
     console.log(resultado);
 }
 
 function filtrarMarca(auto){
+    const {marca} = datosBusqueda;
+
     // console.log(auto);
-    if(datosBusqueda.marca){
-        return auto.marca === datosBusqueda.marca;
+    if(marca){
+        return auto.marca === marca;
     }
 
     // si el usuario no selecciona nada
     return auto;
 }
 
+function filtrarYear(auto){
+    const {year} = datosBusqueda;
+    // console.log(typeof year);
+    // console.log(typeof auto.year);
 
+    if(year){
+        return auto.year === year;
+    }
+
+    // si el usuario no selecciona nada
+    return auto;
+
+}
 
 
 

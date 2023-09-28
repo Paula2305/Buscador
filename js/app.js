@@ -31,37 +31,37 @@ marca.addEventListener('change', e => {
 
 year.addEventListener('change', e => {
     datosBusqueda.year = parseInt(e.target.value); // Todos los datos de un formulario vienen como string y por eso se parsea a entero
-    // console.log(datosBusqueda); 
+
     filtrarAuto();
 });
 
 minimo.addEventListener('change', e => {
-    datosBusqueda.minimo = e.target.value;
-    // console.log(datosBusqueda); 
+    datosBusqueda.minimo = e.target.value; 
+
     filtrarAuto();
 });
 
 maximo.addEventListener('change', e => {
     datosBusqueda.maximo = e.target.value;
-    // console.log(datosBusqueda); 
+
     filtrarAuto();
 });
 
 puertas.addEventListener('change', e => {
     datosBusqueda.puertas = e.target.value;
-    // console.log(datosBusqueda); 
+
     filtrarAuto();
 });
 
 transmision.addEventListener('change', e => {
     datosBusqueda.transmision = e.target.value;
-    // console.log(datosBusqueda); 
+
     filtrarAuto();
 });
 
 color.addEventListener('change', e => {
     datosBusqueda.color = e.target.value;
-    // console.log(datosBusqueda); 
+
     filtrarAuto();
 });
 
@@ -125,7 +125,7 @@ function llenarSelect(){
 
 function filtrarAuto(){
     // console.log('filtrando');
-    const resultado = autos.filter( filtrarMarca ).filter( filtrarYear );
+    const resultado = autos.filter( filtrarMarca ).filter( filtrarYear ).filter(filtrarMinimo).filter(filtrarMaximo);
 
     // console.log(resultado);
 
@@ -156,6 +156,33 @@ function filtrarYear(auto){
     // si el usuario no selecciona nada
     return auto;
 }
+
+function filtrarMinimo(auto){
+    const {minimo} = datosBusqueda;
+    // console.log(typeof year);
+    // console.log(typeof auto.year);
+
+    if(minimo){
+        return auto.precio >= minimo; // no hace falta el parse porque porque no es un operador estricto 
+    }
+
+    // si el usuario no selecciona nada
+    return auto;
+}
+
+function filtrarMaximo(auto){
+    const {maximo} = datosBusqueda;
+    // console.log(typeof year);
+    // console.log(typeof auto.year);
+
+    if(maximo){
+        return auto.precio <= maximo; // no hace falta el parse porque porque no es un operador estricto 
+    }
+
+    // si el usuario no selecciona nada
+    return auto;
+}
+
 
 
 
